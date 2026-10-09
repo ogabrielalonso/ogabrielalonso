@@ -4,9 +4,5 @@
 <br><br>
 
 <img src="assets/whoami.svg" width="100%" alt="Gabriel Alonso, CTO at Focus AI, based in Luxembourg. Building AI tools and frameworks that make AI actually useful.">
-<br><br>
-
-
-Also a contributor to [vinzdg/codenotch](https://github.com/vinzdg/codenotch) · [LinkedIn](https://www.linkedin.com/in/ogabrielalonso/) · [Focus AI](https://focus-ai.io)
 
 </div>
