@@ -23,16 +23,19 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Render from live GitHub data plus local activity
+      - name: Render and publish (re-render on top of any newer push)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python scripts/build_profile.py
-      - name: Commit when the art changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/contributions.svg assets/whoami.svg
-          git diff --cached --quiet && exit 0
-          git commit -m "chore: refresh profile art"
-          git pull --rebase
-          git push
+          for attempt in 1 2 3; do
+            git fetch -q origin main && git reset -q --hard origin/main
+            python scripts/build_profile.py
+            git add assets/contributions.svg assets/whoami.svg
+            git diff --cached --quiet && exit 0
+            git commit -q -m "chore: refresh profile art"
+            git push -q origin HEAD:main && exit 0
+            sleep $((attempt * 5))
+          done
+          exit 1
