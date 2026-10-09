@@ -1,7 +1,9 @@
 """Render the profile README art: assets/contributions.svg and assets/whoami.svg.
 
-Activity = GitHub contribution calendar + data/local-activity.json (commits that exist
-only in local repositories, pushed daily from my server). Standard library only.
+Activity per day = the larger of GitHub's contribution count and my commits across every
+branch of my local repositories (data/local-activity.json, pushed daily from my server).
+GitHub only counts commits on default branches, so local history fills the gap without
+counting a commit twice. Standard library only.
 
 Usage: GITHUB_TOKEN=... python scripts/build_profile.py [--data snapshot.json] [--still]
 """
@@ -162,9 +164,8 @@ def contributions_svg(days, motion):
 
 def whoami_svg(motion):
     x0, y, lh = 28, 72, 27
-    lines = [f'<text x="{x0}" y="{y}" font-size="16"><tspan class="key">gabriel</tspan><tspan class="dim">@</tspan><tspan class="key">github</tspan></text>',
-             f'<text x="{x0}" y="{y + 18}" class="dim" font-size="16">{"─" * 14}</text>']
-    y += 18 + lh
+    lines = []
+    y -= 6
     for i, (k, v) in enumerate(WHOAMI):
         lines.append(f'<text class="l" style="animation-delay:{120 + i * 70}ms" x="{x0}" y="{y}" font-size="15">'
                      f'<tspan class="key">{esc(k)}</tspan><tspan class="dim">:</tspan>'
@@ -174,7 +175,7 @@ def whoami_svg(motion):
     lines += [f'<rect x="{x0 + i * 34}" y="{y}" width="30" height="16" rx="2" fill="{c}"/>' for i, c in enumerate(LEVELS)]
     css = ("@keyframes in{from{opacity:0;transform:translateX(-8px)}}"
            ".l{animation:in .45s cubic-bezier(.16,1,.3,1) backwards}") if motion else ""
-    return window(y + 42, "gabriel@github: ~", "".join(lines), css)
+    return window(y + 42, "whoami", "".join(lines), css)
 
 
 def main():
@@ -196,7 +197,7 @@ def main():
     days = dict(github)
     for k, v in local.items():
         if k in days:
-            days[k] += v
+            days[k] = max(days[k], v)
     svg, stats = contributions_svg(days, motion=not args.still)
     (ASSETS / "contributions.svg").write_text(svg)
     (ASSETS / "whoami.svg").write_text(whoami_svg(motion=not args.still))

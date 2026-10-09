@@ -1,16 +1,11 @@
 <div align="center">
 
-### `gabriel@github ~ $ ./contributions.sh`
-
 <img src="assets/contributions.svg" width="100%" alt="Contribution graph for the last 12 months, GitHub plus commits in my local repositories, refreshed daily">
-
-### `gabriel@github ~ $ whoami`
+<br><br>
 
 <img src="assets/whoami.svg" width="100%" alt="Gabriel Alonso, CTO at Focus AI, based in Luxembourg. Building AI tools and frameworks that make AI actually useful.">
 
 </div>
-
-### `gabriel@github ~ $ ls ~/projects`
 
 - **[second-brain-kit](https://github.com/ogabrielalonso/second-brain-kit)**: a self-hosted second brain for agent CLIs, so your AI knows you in every session.
 - **[decoder](https://github.com/ogabrielalonso/decoder)**: turns any codebase into a cited, checked knowledge base. [Site](https://decoder-dev.vercel.app)
@@ -19,7 +14,5 @@
 - **[youtube-knowledge](https://github.com/ogabrielalonso/youtube-knowledge)**: uploads what a YouTube video teaches into your second brain. [Site](https://youtube-knowledge-dev.vercel.app)
 
 Also a contributor to [vinzdg/codenotch](https://github.com/vinzdg/codenotch).
-
-### `gabriel@github ~ $ ./links.sh`
 
 [LinkedIn](https://www.linkedin.com/in/ogabrielalonso/) · [Focus AI](https://focus-ai.io)
