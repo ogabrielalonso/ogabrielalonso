@@ -35,7 +35,6 @@ WHOAMI = [
     ("Now", "Building AI tools and frameworks that make AI actually useful"),
     ("Delivers", "AI agents & automation, custom software, knowledge systems, AI strategy"),
     ("Method", "Multi-model AI engineering: Codex, Claude Code and Grok as one team"),
-    ("Quality", "Every change reviewed by a different model than the one that wrote it"),
     ("Stack", "Stack-agnostic, delivered through my own AI development framework"),
     ("Languages", "Portuguese, English"),
     ("Contact", "linkedin.com/in/ogabrielalonso"),
@@ -152,8 +151,7 @@ def contributions_svg(days, motion):
     legend = [f'<text x="{lx - 40}" y="{gy}" class="dim" font-size="12">Less</text>']
     legend += [f'<rect x="{lx + i * (cell + 3)}" y="{gy - 11}" width="{cell}" height="{cell}" rx="3" fill="{c}"/>' for i, c in enumerate(LEVELS)]
     legend.append(f'<text x="{lx + 5 * (cell + 3) + 4}" y="{gy}" class="dim" font-size="12">More</text>')
-    note = (f'<text x="{x0}" y="{gy + 24}" class="dim" font-size="12">GitHub plus commits in my local repositories · '
-            f'updated {today.isoformat()}</text>')
+    note = f'<text x="{x0}" y="{gy + 24}" class="dim" font-size="12">GitHub plus commits in my local repositories</text>'
 
     css = ("@keyframes in{from{opacity:0;transform:translateY(-6px)}}"
            ".c{animation:in .5s cubic-bezier(.16,1,.3,1) backwards}") if motion else ""
