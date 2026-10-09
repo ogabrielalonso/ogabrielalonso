@@ -1,15 +1,18 @@
-name: Refresh profile card
+name: Refresh profile art
 
 on:
   schedule:
-    - cron: "17 4 * * *"
+    - cron: "17 5 * * *"
+  push:
+    branches: [main]
+    paths: ["data/local-activity.json"]
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: card
+  group: profile-art
   cancel-in-progress: true
 
 jobs:
@@ -20,14 +23,16 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Render card from live GitHub data
+      - name: Render from live GitHub data plus local activity
         env:
-          GITHUB_TOKEN: ${{ secrets.CARD_TOKEN || secrets.GITHUB_TOKEN }}
-        run: python scripts/build_card.py
-      - name: Commit when the card changed
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/build_profile.py
+      - name: Commit when the art changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/card-light.svg assets/card-dark.svg
-          git diff --cached --quiet || git commit -m "chore: refresh profile card"
+          git add assets/contributions.svg assets/whoami.svg
+          git diff --cached --quiet && exit 0
+          git commit -m "chore: refresh profile art"
+          git pull --rebase
           git push

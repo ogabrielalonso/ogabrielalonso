@@ -1,11 +1,16 @@
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/card-dark.svg">
-  <img src="assets/card-light.svg" width="100%" alt="Gabriel Alonso. I build AI tools and frameworks that make AI actually useful. CTO at Focus AI, based in Luxembourg. The last 12 months of contributions are punched as holes in an 80-column card.">
-</picture>
+<div align="center">
 
-I build AI tools and frameworks that make AI actually useful. By day I'm CTO at [Focus AI](https://focus-ai.io) in Luxembourg.
+### `gabriel@github ~ $ ./contributions.sh`
 
-### What I've shipped
+<img src="assets/contributions.svg" width="100%" alt="Contribution graph for the last 12 months, GitHub plus commits in my local repositories, refreshed daily">
+
+### `gabriel@github ~ $ whoami`
+
+<img src="assets/whoami.svg" width="100%" alt="Gabriel Alonso, CTO at Focus AI, based in Luxembourg. Building AI tools and frameworks that make AI actually useful.">
+
+</div>
+
+### `gabriel@github ~ $ ls ~/projects`
 
 - **[second-brain-kit](https://github.com/ogabrielalonso/second-brain-kit)**: a self-hosted second brain for agent CLIs, so your AI knows you in every session.
 - **[decoder](https://github.com/ogabrielalonso/decoder)**: turns any codebase into a cited, checked knowledge base. [Site](https://decoder-dev.vercel.app)
@@ -15,6 +20,6 @@ I build AI tools and frameworks that make AI actually useful. By day I'm CTO at 
 
 Also a contributor to [vinzdg/codenotch](https://github.com/vinzdg/codenotch).
 
-<p align="center">
-  <a href="https://www.linkedin.com/in/ogabrielalonso/">LinkedIn</a> &nbsp;·&nbsp; <a href="https://focus-ai.io">Focus AI</a>
-</p>
+### `gabriel@github ~ $ ./links.sh`
+
+[LinkedIn](https://www.linkedin.com/in/ogabrielalonso/) · [Focus AI](https://focus-ai.io)
