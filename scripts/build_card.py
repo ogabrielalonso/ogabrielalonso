@@ -52,8 +52,7 @@ query($login: String!) {
       }
     }
     repositories(ownerAffiliations: OWNER, privacy: PUBLIC, isFork: false, first: 100) {
-      totalCount
-      nodes { stargazerCount }
+      nodes { name stargazerCount }
     }
   }
 }
@@ -105,12 +104,13 @@ def fetch(token):
         raise SystemExit(f"GraphQL error: {body['errors']}")
     user = body["data"]["user"]
     cal = user["contributionsCollection"]["contributionCalendar"]
-    repos = user["repositories"]
+    # the profile README repo is not a project
+    repos = [n for n in user["repositories"]["nodes"] if n["name"] != LOGIN]
     return {
         "total": cal["totalContributions"],
         "weeks": [[(d["date"], d["contributionCount"]) for d in w["contributionDays"]] for w in cal["weeks"]],
-        "repos": repos["totalCount"],
-        "stars": sum(n["stargazerCount"] for n in repos["nodes"]),
+        "repos": len(repos),
+        "stars": sum(n["stargazerCount"] for n in repos),
         "updated": dt.date.today().isoformat(),
     }
 
