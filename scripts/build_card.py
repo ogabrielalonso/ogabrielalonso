@@ -37,8 +37,6 @@ PROFILE = {
     "fields": [
         ("Role", "CTO, Focus AI", 27),
         ("Based in", "Luxembourg", 39),
-        ("Speaks", "PT, EN, FR", 49),
-        ("Works with", "Claude Code, Codex", 58),
     ],
 }
 

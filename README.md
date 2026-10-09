@@ -3,7 +3,7 @@
   <img src="assets/card-light.svg" width="100%" alt="Gabriel Alonso. I build AI tools and frameworks that make AI actually useful. CTO at Focus AI, based in Luxembourg. The last 12 months of contributions are punched as holes in an 80-column card.">
 </picture>
 
-I build AI tools and frameworks that make AI actually useful, mostly for Claude Code and Codex. By day I'm CTO at [Focus AI](https://focus-ai.io) in Luxembourg.
+I build AI tools and frameworks that make AI actually useful. By day I'm CTO at [Focus AI](https://focus-ai.io) in Luxembourg.
 
 ### What I've shipped
 
