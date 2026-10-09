@@ -138,7 +138,7 @@ def dot_matrix(text, x, y, dot, color):
 def render(data, theme, motion=True):
     weeks = data["weeks"][-52:]
     first_heat_col = 27
-    holes, digits, months = [], [], []
+    holes, chads, digits, months = [], [], [], []
     active = 0
     prev_month, last_label = None, -9
     for wi, week in enumerate(weeks):
@@ -156,10 +156,10 @@ def render(data, theme, motion=True):
             i = 5 + day
             if days.get(wd, 0) > 0:
                 active += 1
-                holes.append(
-                    f'<rect class="h c{wi}" x="{col_x(c) - HOLE_W / 2:.2f}" y="{row_y(i) - HOLE_H / 2:.2f}" '
-                    f'width="{HOLE_W}" height="{HOLE_H}" rx="1"/>'
-                )
+                hole = (f'x="{col_x(c) - HOLE_W / 2:.2f}" y="{row_y(i) - HOLE_H / 2:.2f}" '
+                        f'width="{HOLE_W}" height="{HOLE_H}" rx="1"')
+                holes.append(f'<rect {hole}/>')
+                chads.append(f'<rect class="chad c{wi}" {hole}/>')
             else:
                 digits.append(f'<text x="{col_x(c):.2f}" y="{row_y(i) + 3.6:.2f}">{3 + day}</text>')
 
@@ -193,8 +193,8 @@ def render(data, theme, motion=True):
     portrait = base64.b64encode((ASSETS / "portrait-ink.png").read_bytes()).decode()
 
     motion_css = (
-        "@keyframes punch{0%{fill:#fff}100%{fill:#000}}"
-        ".h{animation:punch 1ms steps(1) backwards}" + delays
+        "@keyframes punch{0%{opacity:1}100%{opacity:0}}"
+        ".chad{animation:punch 1ms steps(1) backwards}" + delays
     ) if motion else ""
 
     return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="{-pad} {-pad} {W + 2 * pad} {H + 2 * pad}" width="{W + 2 * pad}" height="{H + 2 * pad}" role="img" aria-labelledby="t d">
@@ -212,15 +212,15 @@ def render(data, theme, motion=True):
 .mo text{{font:600 13px ArchivoLabel,sans-serif;fill:{INK_SOFT};letter-spacing:.6px}}
 .cn text{{font:600 7px ArchivoLabel,sans-serif;fill:{PRINT};text-anchor:middle}}
 .rules line{{stroke:{INK_SOFT};stroke-width:1;opacity:.55}}
-.h{{fill:#000}}
+.chad{{fill:{STOCK};opacity:0}}
 {motion_css}
-@media (prefers-reduced-motion:reduce){{.h{{animation:none}}}}
+@media (prefers-reduced-motion:reduce){{.chad{{animation:none}}}}
 </style>
 <defs>
 {shadow}
 <mask id="punched" maskUnits="userSpaceOnUse" x="0" y="0" width="{W}" height="{H}">
 <rect width="{W}" height="{H}" fill="#fff"/>
-{''.join(holes)}
+<g fill="#000">{''.join(holes)}</g>
 </mask>
 <clipPath id="card"><path d="{card_path}"/></clipPath>
 </defs>
@@ -240,6 +240,7 @@ def render(data, theme, motion=True):
 <g class="mo">{''.join(months)}</g>
 </g>
 </g>
+<g>{''.join(chads)}</g>
 </g>
 </svg>
 """
